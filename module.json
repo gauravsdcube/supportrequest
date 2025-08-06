@@ -1,0 +1,25 @@
+{
+  "id": "requestSupport",
+  "name": "Request Support",
+  "description": "A comprehensive support request management system for HumHub spaces",
+  "keywords": [
+    "support",
+    "requests",
+    "help",
+    "tickets"
+  ],
+  "version": "1.0.4",
+  "humhub": {
+    "minVersion": "1.17.0",
+    "maxVersion": "1.17.*"
+  },
+  "homepage": "https://github.com/humhub/request-support",
+  "screenshots": [],
+  "authors": [
+    {
+      "name": "HumHub Community",
+      "homepage": "https://www.humhub.org/"
+    }
+  ],
+  "license": "AGPL-3.0-or-later"
+} 
