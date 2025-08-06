@@ -4,7 +4,6 @@
 - **Repository**: https://github.com/gauravsdcube/supportrequest
 - **Module Name**: RequestSupport
 - **Version**: 1.0.4
-- **License**: AGPL-3.0-or-later
 - **Author**: D Cube Consulting Ltd
 - **Contact**: info@dcubeconsulting.co.uk
 
