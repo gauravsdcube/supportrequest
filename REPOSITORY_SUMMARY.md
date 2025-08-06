@@ -5,7 +5,8 @@
 - **Module Name**: RequestSupport
 - **Version**: 1.0.4
 - **License**: AGPL-3.0-or-later
-- **Author**: Gaurav Singh (@gauravsdcube)
+- **Author**: D Cube Consulting Ltd
+- **Contact**: info@dcubeconsulting.co.uk
 
 ## What's Included
 
@@ -139,6 +140,7 @@ supportrequest/
 - **GitHub Issues**: https://github.com/gauravsdcube/supportrequest/issues
 - **Documentation**: See README.md for detailed usage instructions
 - **Deployment**: See DEPLOYMENT.md for production deployment guide
+- **Contact**: info@dcubeconsulting.co.uk
 
 ## License
 This module is licensed under the GNU Affero General Public License v3.0 or later (AGPL-3.0-or-later), the same license as HumHub.
@@ -147,4 +149,5 @@ This module is licensed under the GNU Affero General Public License v3.0 or late
 
 **Repository Status**: ✅ Complete and Production Ready
 **Last Updated**: August 2024
-**HumHub Compatibility**: 1.17.3+ 
+**HumHub Compatibility**: 1.17.3+
+**Copyright**: © 2025 D Cube Consulting Ltd 

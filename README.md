@@ -230,7 +230,7 @@ Enable debug mode in your HumHub configuration to see detailed error messages:
 
 For issues and feature requests:
 - Create an issue on this GitHub repository
-- Contact the development team
+- Contact D Cube Consulting at info@dcubeconsulting.co.uk
 - Check the HumHub community forums
 
 ## License
@@ -269,4 +269,4 @@ This module is licensed under the same license as HumHub (AGPL-3.0-or-later).
 
 ## Credits
 
-Developed for HumHub community by [Gaurav Singh](https://github.com/gauravsdcube). 
+Developed by [D Cube Consulting](https://dcubeconsulting.co.uk/). 

@@ -13,12 +13,13 @@
     "minVersion": "1.17.0",
     "maxVersion": "1.17.*"
   },
-  "homepage": "https://github.com/humhub/request-support",
+  "homepage": "https://github.com/gauravsdcube/supportrequest",
   "screenshots": [],
   "authors": [
     {
-      "name": "HumHub Community",
-      "homepage": "https://www.humhub.org/"
+      "name": "D Cube Consulting",
+      "email": "info@dcubeconsulting.co.uk",
+      "homepage": "https://dcubeconsulting.co.uk/"
     }
   ],
   "license": "AGPL-3.0-or-later"

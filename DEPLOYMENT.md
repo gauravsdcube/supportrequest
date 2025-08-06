@@ -328,7 +328,7 @@ Enable debug mode temporarily for troubleshooting:
 For deployment issues:
 - Check the HumHub community forums
 - Review the module's GitHub issues
-- Contact the development team
+- Contact D Cube Consulting at info@dcubeconsulting.co.uk
 
 ## Security Considerations
 
