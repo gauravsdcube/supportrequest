@@ -233,10 +233,6 @@ For issues and feature requests:
 - Contact D Cube Consulting at info@dcubeconsulting.co.uk
 - Check the HumHub community forums
 
-## License
-
-This module is licensed under the same license as HumHub (AGPL-3.0-or-later).
-
 ## Changelog
 
 ### Version 1.0.4
