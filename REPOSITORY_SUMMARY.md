@@ -141,11 +141,6 @@ supportrequest/
 - **Deployment**: See DEPLOYMENT.md for production deployment guide
 - **Contact**: info@dcubeconsulting.co.uk
 
-## License
-This module is licensed under the GNU Affero General Public License v3.0 or later (AGPL-3.0-or-later), the same license as HumHub.
-
----
-
 **Repository Status**: ✅ Complete and Production Ready
 **Last Updated**: August 2024
 **HumHub Compatibility**: 1.17.3+
