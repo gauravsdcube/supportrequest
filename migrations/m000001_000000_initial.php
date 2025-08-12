@@ -17,7 +17,7 @@ class m000001_000000_initial extends Migration
             'created_at' => $this->dateTime(),
             'created_by' => $this->integer(),
             'updated_at' => $this->dateTime(),
-            'updated_by' => $this->integer()
+            'updated_by' => $this->integer(),
         ]);
 
         // Support Requests table
@@ -25,12 +25,12 @@ class m000001_000000_initial extends Migration
             'id' => $this->primaryKey(),
             'subject' => $this->string(255)->notNull(),
             'description' => $this->text()->notNull(),
-            'category' => $this->string(100)->notNull(),
+            'category_id' => $this->integer()->notNull(),
             'status' => $this->string(20)->defaultValue('open'),
             'created_at' => $this->dateTime(),
             'created_by' => $this->integer(),
             'updated_at' => $this->dateTime(),
-            'updated_by' => $this->integer()
+            'updated_by' => $this->integer(),
         ]);
 
         // Support Responses table
@@ -41,7 +41,7 @@ class m000001_000000_initial extends Migration
             'created_at' => $this->dateTime(),
             'created_by' => $this->integer(),
             'updated_at' => $this->dateTime(),
-            'updated_by' => $this->integer()
+            'updated_by' => $this->integer(),
         ]);
 
         // Indexes
@@ -58,7 +58,7 @@ class m000001_000000_initial extends Migration
             'space_id',
             'space',
             'id',
-            'CASCADE'
+            'CASCADE',
         );
 
         $this->addForeignKey(
@@ -67,7 +67,7 @@ class m000001_000000_initial extends Migration
             'created_by',
             'user',
             'id',
-            'SET NULL'
+            'SET NULL',
         );
 
         $this->addForeignKey(
@@ -76,7 +76,7 @@ class m000001_000000_initial extends Migration
             'created_by',
             'user',
             'id',
-            'CASCADE'
+            'CASCADE',
         );
 
         $this->addForeignKey(
@@ -85,7 +85,7 @@ class m000001_000000_initial extends Migration
             'request_id',
             'requestsupport_request',
             'id',
-            'CASCADE'
+            'CASCADE',
         );
 
         $this->addForeignKey(
@@ -94,41 +94,14 @@ class m000001_000000_initial extends Migration
             'created_by',
             'user',
             'id',
-            'CASCADE'
+            'CASCADE',
         );
-
-        // Insert default categories
-        $this->insertDefaultCategories();
     }
 
     public function safeDown()
     {
-        $this->safeDropTable('requestsupport_response');
-        $this->safeDropTable('requestsupport_request');
-        $this->safeDropTable('requestsupport_category');
-    }
+        echo "m000001_000000_initial cannot be reverted.\n";
 
-    private function insertDefaultCategories()
-    {
-        $defaultCategories = [
-            'Technical Issue',
-            'Account Problem',
-            'Content Issue',
-            'General Question',
-            'Bug Report',
-            'Feature Request'
-        ];
-
-        foreach ($defaultCategories as $index => $category) {
-            $this->insert('requestsupport_category', [
-                'name' => $category,
-                'description' => 'Default category for ' . $category,
-                'space_id' => 1, // Will be updated when module is enabled in spaces
-                'sort_order' => $index,
-                'is_active' => true,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ]);
-        }
+        return false;
     }
-} 
+}

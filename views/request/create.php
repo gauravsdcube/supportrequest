@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use humhub\modules\ui\form\widgets\ActiveField;
 
 /* @var $this \humhub\modules\ui\view\components\View */
 /* @var $model \humhub\modules\requestSupport\models\SupportRequest */
@@ -17,7 +16,7 @@ use humhub\modules\ui\form\widgets\ActiveField;
             <h4><?= Yii::t('RequestSupportModule.base', 'Create Support Request') ?></h4>
         </div>
     </div>
-    
+
     <div class="panel-body">
         <?php $form = ActiveForm::begin(['id' => 'support-request-form']); ?>
 
@@ -26,7 +25,7 @@ use humhub\modules\ui\form\widgets\ActiveField;
                 <?= $form->field($model, 'subject')->textInput(['maxlength' => true]) ?>
             </div>
             <div class="col-md-4">
-                <?= $form->field($model, 'category')->dropDownList($categories, ['prompt' => Yii::t('RequestSupportModule.base', 'Select a category')]) ?>
+                <?= $form->field($model, 'category_id')->dropDownList($categories, ['prompt' => Yii::t('RequestSupportModule.base', 'Select a category')]) ?>
             </div>
         </div>
 
@@ -37,7 +36,7 @@ use humhub\modules\ui\form\widgets\ActiveField;
                 '<i class="fa fa-send"></i> ' . Yii::t('RequestSupportModule.base', 'Submit Request'),
                 ['class' => 'btn btn-primary']
             ) ?>
-            
+
             <?= Html::a(
                 '<i class="fa fa-times"></i> ' . Yii::t('RequestSupportModule.base', 'Cancel'),
                 ['/requestSupport/default/index', 'contentContainer' => $contentContainer],
@@ -47,4 +46,4 @@ use humhub\modules\ui\form\widgets\ActiveField;
 
         <?php ActiveForm::end(); ?>
     </div>
-</div> 
+</div>

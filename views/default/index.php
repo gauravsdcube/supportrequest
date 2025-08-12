@@ -1,10 +1,9 @@
 <?php
 
-use yii\helpers\Html;
-use yii\helpers\Url;
 use humhub\modules\requestSupport\models\SupportRequest;
 use humhub\modules\requestSupport\permissions\CreateSupportRequest;
-use humhub\modules\requestSupport\permissions\ManageSupportRequests;
+use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $this \humhub\modules\ui\view\components\View */
 /* @var $requests SupportRequest[] */
@@ -27,7 +26,7 @@ use humhub\modules\requestSupport\permissions\ManageSupportRequests;
             </div>
         <?php endif; ?>
     </div>
-    
+
     <div class="panel-body">
         <?php if ($contentContainer->can(new CreateSupportRequest())): ?>
             <div class="text-right" style="margin-bottom: 20px;">
@@ -65,7 +64,7 @@ use humhub\modules\requestSupport\permissions\ManageSupportRequests;
                                     <strong><?= Html::encode($request->subject) ?></strong>
                                 </td>
                                 <td>
-                                    <span class="label label-info"><?= Html::encode($request->getCategoryName()) ?></span>
+                                    <span class="label label-info"><?= Html::encode($request->category->name) ?></span>
                                 </td>
                                 <td>
                                     <?php
@@ -101,7 +100,7 @@ use humhub\modules\requestSupport\permissions\ManageSupportRequests;
                                         Url::to(['/requestSupport/request/view', 'id' => $request->id, 'contentContainer' => $contentContainer]),
                                         ['class' => 'btn btn-xs btn-default', 'title' => Yii::t('RequestSupportModule.base', 'View')]
                                     ) ?>
-                                    
+
                                     <?php if ($request->canManage()): ?>
                                         <?= Html::a(
                                             '<i class="fa fa-edit"></i>',
@@ -117,4 +116,4 @@ use humhub\modules\requestSupport\permissions\ManageSupportRequests;
             </div>
         <?php endif; ?>
     </div>
-</div> 
+</div>

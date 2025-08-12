@@ -2,28 +2,18 @@
 
 namespace humhub\modules\requestSupport\notifications;
 
-use Yii;
+use humhub\libs\Html;
 use humhub\modules\notification\components\BaseNotification;
 use humhub\modules\requestSupport\models\SupportRequest;
-use humhub\libs\Html;
+use Yii;
 
 class SupportRequestResponse extends BaseNotification
 {
     public $moduleId = 'requestSupport';
-    
-    /**
-     * @var bool do not send this notification also to the originator
-     */
-    public $suppressSendToOriginator = false;
-
-    /**
-     * @inheritdoc
-     */
-    public $viewName = 'supportRequestResponse';
 
     public function category()
     {
-        return new \humhub\modules\requestSupport\notifications\SupportRequestNotificationCategory();
+        return new SupportRequestNotificationCategory();
     }
 
     public function html()
@@ -88,4 +78,4 @@ class SupportRequestResponse extends BaseNotification
     {
         return Yii::t('RequestSupportModule.notifications', 'Your support request has received a response.');
     }
-} 
+}
