@@ -26,7 +26,7 @@ class Events
             'url' => $space->createUrl('/requestSupport/default'),
             'icon' => '<i class="fa fa-question-circle"></i>',
             'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id === 'requestSupport'),
-            'sortOrder' => 600,
+            'sortOrder' => 20002,
         ]);
     }
 }
