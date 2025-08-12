@@ -2,34 +2,23 @@
 
 namespace humhub\modules\requestSupport\notifications;
 
-use Yii;
+use humhub\libs\Html;
 use humhub\modules\notification\components\BaseNotification;
 use humhub\modules\requestSupport\models\SupportRequest;
-use humhub\libs\Html;
+use Yii;
 
 class NewSupportRequest extends BaseNotification
 {
     public $moduleId = 'requestSupport';
-    
+
     /**
      * @var bool do not send this notification also to the originator
      */
     public $suppressSendToOriginator = false;
 
-    /**
-     * @inheritdoc
-     */
-    public $viewName = 'newSupportRequest';
-
-    public function __construct(...$args)
-    {
-        \Yii::info('Loaded NewSupportRequest notification class');
-        parent::__construct(...$args);
-    }
-
     public function category()
     {
-        return new \humhub\modules\requestSupport\notifications\SupportRequestNotificationCategory();
+        return new SupportRequestNotificationCategory();
     }
 
     public function html()
@@ -100,4 +89,4 @@ class NewSupportRequest extends BaseNotification
     {
         return Yii::t('RequestSupportModule.notifications', 'A new support request has been created.');
     }
-} 
+}

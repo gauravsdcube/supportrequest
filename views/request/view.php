@@ -1,9 +1,9 @@
 <?php
 
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-use yii\helpers\Url;
 use humhub\modules\requestSupport\models\SupportRequest;
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\widgets\ActiveForm;
 
 /* @var $this \humhub\modules\ui\view\components\View */
 /* @var $model \humhub\modules\requestSupport\models\SupportRequest */
@@ -18,7 +18,7 @@ use humhub\modules\requestSupport\models\SupportRequest;
             <h4><?= Html::encode($model->subject) ?></h4>
         </div>
     </div>
-    
+
     <div class="panel-body">
         <div class="row">
             <div class="col-md-8">
@@ -33,10 +33,10 @@ use humhub\modules\requestSupport\models\SupportRequest;
                         <h5 class="panel-title"><?= Yii::t('RequestSupportModule.base', 'Request Details') ?></h5>
                     </div>
                     <div class="panel-body">
-                        <p><strong><?= Yii::t('RequestSupportModule.base', 'Category') ?>:</strong> 
-                            <span class="label label-info"><?= Html::encode($model->getCategoryName()) ?></span>
+                        <p><strong><?= Yii::t('RequestSupportModule.base', 'Category') ?>:</strong>
+                            <span class="label label-info"><?= Html::encode($model->category->name) ?></span>
                         </p>
-                        <p><strong><?= Yii::t('RequestSupportModule.base', 'Status') ?>:</strong> 
+                        <p><strong><?= Yii::t('RequestSupportModule.base', 'Status') ?>:</strong>
                             <?php
                             $statusClass = 'label-default';
                             switch ($model->status) {
@@ -58,25 +58,25 @@ use humhub\modules\requestSupport\models\SupportRequest;
                                 <?= Html::encode(SupportRequest::getStatusOptions()[$model->status]) ?>
                             </span>
                         </p>
-                        <p><strong><?= Yii::t('RequestSupportModule.base', 'Requester') ?>:</strong> 
+                        <p><strong><?= Yii::t('RequestSupportModule.base', 'Requester') ?>:</strong>
                             <?= Html::encode($model->requester->displayName) ?>
                         </p>
-                        <p><strong><?= Yii::t('RequestSupportModule.base', 'Created') ?>:</strong> 
+                        <p><strong><?= Yii::t('RequestSupportModule.base', 'Created') ?>:</strong>
                             <?= Yii::$app->formatter->asDatetime($model->created_at) ?>
                         </p>
-                        
+
                         <?php if ($model->canManage()): ?>
                             <hr>
                             <h6><?= Yii::t('RequestSupportModule.base', 'Manage Request') ?></h6>
-                            
+
                             <!-- Status Change Form -->
                             <div class="form-group">
                                 <label><?= Yii::t('RequestSupportModule.base', 'Change Status') ?></label>
                                 <?php $statusForm = ActiveForm::begin(['id' => 'status-form', 'method' => 'post']); ?>
                                     <?= Html::dropDownList(
-                                        'new_status', 
-                                        $model->status, 
-                                        SupportRequest::getStatusOptions(), 
+                                        'new_status',
+                                        $model->status,
+                                        SupportRequest::getStatusOptions(),
                                         [
                                             'class' => 'form-control',
                                             'style' => 'display: inline-block; width: auto; margin-right: 10px;'
@@ -92,7 +92,7 @@ use humhub\modules\requestSupport\models\SupportRequest;
                                     ) ?>
                                 <?php ActiveForm::end(); ?>
                             </div>
-                            
+
                             <?= Html::a(
                                 '<i class="fa fa-edit"></i> ' . Yii::t('RequestSupportModule.base', 'Edit Request'),
                                 Url::to(['/requestSupport/request/update', 'id' => $model->id, 'contentContainer' => $contentContainer]),
@@ -107,7 +107,7 @@ use humhub\modules\requestSupport\models\SupportRequest;
         <hr>
 
         <h5><?= Yii::t('RequestSupportModule.base', 'Responses') ?></h5>
-        
+
         <?php if (empty($model->responses)): ?>
             <div class="text-center">
                 <p class="text-muted">
@@ -151,7 +151,7 @@ use humhub\modules\requestSupport\models\SupportRequest;
                     '<i class="fa fa-reply"></i> ' . Yii::t('RequestSupportModule.base', 'Add Response'),
                     ['class' => 'btn btn-success']
                 ) ?>
-                
+
                 <?= Html::a(
                     '<i class="fa fa-arrow-left"></i> ' . Yii::t('RequestSupportModule.base', 'Back to List'),
                     ['/requestSupport/default/index', 'contentContainer' => $contentContainer],
@@ -169,4 +169,4 @@ use humhub\modules\requestSupport\models\SupportRequest;
             <?php endif; ?>
         <?php endif; ?>
     </div>
-</div> 
+</div>

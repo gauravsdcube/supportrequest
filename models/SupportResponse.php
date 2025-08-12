@@ -2,9 +2,21 @@
 
 namespace humhub\modules\requestSupport\models;
 
-use Yii;
 use humhub\modules\user\models\User;
+use Yii;
 
+/**
+ * @property int $id
+ * @property int $request_id
+ * @property string $message
+ * @property int $created_by
+ * @property int $updated_by
+ * @property string $created_at
+ * @property string $updated_at
+ *
+ * @property-read SupportRequest $request
+ * @property-read User $author
+ */
 class SupportResponse extends \yii\db\ActiveRecord
 {
     public static function tableName()
@@ -54,4 +66,4 @@ class SupportResponse extends \yii\db\ActiveRecord
         }
         return false;
     }
-} 
+}

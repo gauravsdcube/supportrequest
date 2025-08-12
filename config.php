@@ -12,14 +12,9 @@ return [
     ],
     'events' => [
         [
-            'class' => \humhub\modules\space\models\Space::class,
-            'event' => \humhub\modules\space\models\Space::EVENT_INIT,
-            'callback' => [Events::class, 'onSpaceInit'],
-        ],
-        [
             'class' => \humhub\modules\space\widgets\Menu::class,
             'event' => \humhub\modules\space\widgets\Menu::EVENT_INIT,
             'callback' => [Events::class, 'onSpaceMenuInit'],
         ],
     ],
-]; 
+];

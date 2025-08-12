@@ -2,9 +2,12 @@
 
 namespace humhub\modules\requestSupport;
 
-use Yii;
+use humhub\modules\content\components\ContentContainerActiveRecord;
 use humhub\modules\content\components\ContentContainerModule;
+use humhub\modules\requestSupport\models\SupportCategory;
+use humhub\modules\requestSupport\models\SupportRequest;
 use humhub\modules\space\models\Space;
+use yii\web\ForbiddenHttpException;
 
 class Module extends ContentContainerModule
 {
@@ -27,11 +30,11 @@ class Module extends ContentContainerModule
 
     public function getPermissions($contentContainer = null)
     {
-        return [
+        return $contentContainer ? [
             new permissions\CreateSupportRequest(),
             new permissions\ManageSupportRequests(),
             new permissions\ManageCategories(),
-        ];
+        ] : [];
     }
 
     /**
@@ -92,4 +95,37 @@ class Module extends ContentContainerModule
     {
         return $this->getImage();
     }
-} 
+
+    public function enableContentContainer(ContentContainerActiveRecord $container)
+    {
+        if (!$container instanceof Space) {
+            throw new ForbiddenHttpException('This module can only be enabled in a Space');
+        }
+
+        parent::enableContentContainer($container);
+
+        SupportCategory::createDefaultCategories($container->id);
+    }
+
+    public function disableContentContainer(ContentContainerActiveRecord $container)
+    {
+        parent::disableContentContainer($container);
+
+        foreach (SupportCategory::findAll(['space_id' => $container->id]) as $category) {
+            $category->delete();
+        }
+    }
+
+    public function disable()
+    {
+        foreach (SupportRequest::find()->each() as $request) {
+            $request->delete();
+        }
+
+        foreach (SupportCategory::find()->each() as $category) {
+            $category->delete();
+        }
+
+        return parent::disable();
+    }
+}

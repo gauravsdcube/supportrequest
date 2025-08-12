@@ -2,19 +2,61 @@
 
 namespace humhub\modules\requestSupport\models;
 
-use Yii;
 use humhub\modules\content\components\ContentActiveRecord;
-use humhub\modules\search\interfaces\Searchable;
-use humhub\modules\user\models\User;
 use humhub\modules\space\models\Space;
-use humhub\modules\requestSupport\models\SupportCategory;
+use humhub\modules\user\models\User;
+use Yii;
 
-class SupportRequest extends ContentActiveRecord implements Searchable
+/**
+ * @property int $id
+ * @property string $subject
+ * @property string $description
+ * @property string $status
+ * @property int $category_id
+ * @property string $created_at
+ * @property string $updated_at
+ * @property int $created_by
+ * @property int $updated_by
+ *
+ * @property-read User $requester
+ * @property-read mixed $contentDescription
+ * @property-read SupportResponse[] $responses
+ * @property-read array $searchAttributes
+ * @property-read SupportCategory $category
+ * @property-read mixed $url
+ * @property-read Space $space
+ * @property-read string $contentName
+ */
+class SupportRequest extends ContentActiveRecord
 {
     const STATUS_OPEN = 'open';
     const STATUS_IN_PROGRESS = 'in_progress';
     const STATUS_RESOLVED = 'resolved';
     const STATUS_CLOSED = 'closed';
+    /**
+     * @inheritdoc
+     */
+    public $canMove = false;
+    /**
+     * @inheritdoc
+     */
+    public $wallEntryClass = null;
+    /**
+     * @inheritdoc
+     */
+    public $autoFollow = false;
+    /**
+     * @inheritdoc
+     */
+    public $silentContentCreation = true;
+    /**
+     * @inheritdoc
+     */
+    protected $moduleId = 'supportRequest';
+    /**
+     * @inheritdoc
+     */
+    protected $streamChannel = null;
 
     public static function tableName()
     {
@@ -24,14 +66,13 @@ class SupportRequest extends ContentActiveRecord implements Searchable
     public function rules()
     {
         return [
-            [['subject', 'description', 'category'], 'required'],
+            [['subject', 'description', 'category_id'], 'required'],
             [['subject'], 'string', 'max' => 255],
             [['description'], 'string'],
-            [['category'], 'string', 'max' => 100],
             [['status'], 'in', 'range' => [self::STATUS_OPEN, self::STATUS_IN_PROGRESS, self::STATUS_RESOLVED, self::STATUS_CLOSED]],
             [['status'], 'default', 'value' => self::STATUS_OPEN],
             [['created_at', 'updated_at'], 'safe'],
-            [['created_by', 'updated_by'], 'integer'],
+            [['category_id', 'created_by', 'updated_by'], 'integer'],
         ];
     }
 
@@ -40,7 +81,7 @@ class SupportRequest extends ContentActiveRecord implements Searchable
         return [
             'subject' => 'Subject',
             'description' => 'Description',
-            'category' => 'Category',
+            'category_id' => 'Category',
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
@@ -55,16 +96,6 @@ class SupportRequest extends ContentActiveRecord implements Searchable
     public function getContentDescription()
     {
         return $this->subject;
-    }
-
-    public function getSearchAttributes()
-    {
-        return [
-            'subject' => $this->subject,
-            'description' => $this->description,
-            'status' => $this->status,
-            'category' => $this->category,
-        ];
     }
 
     public static function getStatusOptions()
@@ -90,16 +121,6 @@ class SupportRequest extends ContentActiveRecord implements Searchable
     public function getResponses()
     {
         return $this->hasMany(SupportResponse::class, ['request_id' => 'id'])->orderBy(['created_at' => SORT_ASC]);
-    }
-
-    public function getCategoryName()
-    {
-        if (!$this->category) {
-            return '';
-        }
-        
-        $category = SupportCategory::findOne($this->category);
-        return $category ? $category->name : $this->category;
     }
 
     public function canView($user = null)
@@ -219,4 +240,17 @@ class SupportRequest extends ContentActiveRecord implements Searchable
     {
         return \yii\helpers\Url::to(['/requestSupport/request/view', 'id' => $this->id, 'contentContainer' => $this->content->container]);
     }
-} 
+
+    public function afterDelete()
+    {
+        foreach ($this->getResponses()->each() as $response) {
+            $response->delete();
+        }
+        parent::afterDelete();
+    }
+
+    public function getCategory()
+    {
+        return $this->hasOne(SupportCategory::class, ['id' => 'category_id']);
+    }
+}
